@@ -11,9 +11,9 @@ set -gx FZF_DEFAULT_OPTS '
 --color=bg+:0,pointer:2,fg+:2,hl:5,hl+:5,info:3
 '
 
-alias S "sudo pacman -Syu"
-alias Rs "sudo pacman -Rs"
-alias Ss "pacman -Ss"
+abbr -ag S "sudo pacman -Syu"
+abbr -ag Rs "sudo pacman -Rs"
+abbr -ag Ss "pacman -Ss"
 alias n "nnn -H -o"
 alias rm "echo Use 'trash', or the full path i.e. '/bin/rm'"
 alias Sq "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
@@ -45,3 +45,8 @@ function fd
     cd $result
   end
 end
+
+# pnpm
+set -gx PNPM_HOME "/home/n/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end

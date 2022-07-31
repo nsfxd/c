@@ -48,7 +48,8 @@ nnoremap <expr> r <SID>ReplaceMM()
 nnoremap rG "_dGpj
 nnoremap R "_Dp
 " replace line without newline: move to start, delete til end, paste substituted newline line
-nnoremap <silent> rr 0"_D:let @+ = substitute(@+, "\n", "", "g")<CR>p
+" nnoremap <silent> rr 0"_D:let @+ = substitute(@+, "\n", "", "g")<CR>p
+nnoremap <silent> rr "_ddP
 " map s as search
 function s:SearchMM()
   let char1 = nr2char(getchar())

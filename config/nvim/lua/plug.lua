@@ -8,6 +8,15 @@ require'nvim-treesitter.configs'.setup {
    }
 }
 require'nvim-tree'.setup()
+require("nvim-tree").setup({
+  view = {
+    mappings = {
+      list = {
+        { key = "d", action = "trash" },
+      },
+    },
+  },
+})
 require('telescope').setup {
     defaults = {file_ignore_patterns = {"node_modules", "dist"}},
     pickers = {find_files = {hidden = true}}
