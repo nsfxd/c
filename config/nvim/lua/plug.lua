@@ -1,33 +1,21 @@
-local map = vim.api.nvim_set_keymap
+require("nnn").setup()
 require'pears'.setup()
 require'colorizer'.setup()
 require'nvim-treesitter.configs'.setup {
-   highlight = {
-     enable = true,
-     additional_vim_regex_highlighting = false,
-   }
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  }
 }
-require'nvim-tree'.setup()
-require("nvim-tree").setup({
-  view = {
-    mappings = {
-      list = {
-        { key = "d", action = "trash" },
-      },
-    },
-  },
-})
 require('telescope').setup {
     defaults = {file_ignore_patterns = {"node_modules", "dist"}},
     pickers = {find_files = {hidden = true}}
 }
 
-local lsp = require('lsp-zero')
-lsp.preset('recommended')
-lsp.setup()
-
 vim.g.kommentary_create_default_mappings = false
 require('kommentary.config').setup()
+local map = vim.api.nvim_set_keymap
 map("n", "<leader>//", "<Plug>kommentary_line_default", {})
 map("n", "<leader>/", "<Plug>kommentary_motion_default", {})
 map("x", "<leader>/", "<Plug>kommentary_visual_default", {})

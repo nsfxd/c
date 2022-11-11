@@ -48,7 +48,6 @@ nnoremap <expr> r <SID>ReplaceMM()
 nnoremap rG "_dGpj
 nnoremap R "_Dp
 " replace line without newline: move to start, delete til end, paste substituted newline line
-" nnoremap <silent> rr 0"_D:let @+ = substitute(@+, "\n", "", "g")<CR>p
 nnoremap <silent> rr "_ddP
 " map s as search
 function s:SearchMM()
@@ -76,77 +75,3 @@ let vimplug = expand(stdpath('data') . '/site/autoload/plug.vim')
 if filereadable(vimplug)
   source ~/.config/nvim/plug.vim
 endif
-""call plug#begin(stdpath('data') . '/plugged')
-""" visual
-""Plug 'bluz71/vim-moonfly-colors'
-""Plug 'kyazdani42/nvim-web-devicons'
-""Plug 'norcalli/nvim-colorizer.lua'
-""" utils
-""Plug 'steelsojka/pears.nvim'
-""Plug 'b3nj5m1n/kommentary'
-""Plug 'tpope/vim-abolish'
-""Plug 'norcalli/nvim-colorizer.lua'
-""" " utils
-""Plug 'nvim-lua/popup.nvim'
-""Plug 'nvim-lua/plenary.nvim'
-""Plug 'nvim-telescope/telescope.nvim'
-""Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-""Plug 'kyazdani42/nvim-tree.lua'
-""" " coc
-""Plug 'neoclide/coc.nvim', {'branch': 'release'}
-""" " repl
-""Plug 'jpalardy/vim-slime'
-""" " slime
-""" Plug 'nvim-orgmode/orgmode'
-""call plug#end()
-""" " lua require("plugins")
-""colorscheme moonfly
-""lua <<EOF
-""require'pears'.setup()
-""require'colorizer'.setup()
-""require('telescope').setup {
-""    defaults = {file_ignore_patterns = {"node_modules", "dist"}},
-""    pickers = {find_files = {hidden = true}}
-""}
-""require'nvim-treesitter.configs'.setup {
-""   ensure_installed = "all",
-""   highlight = {
-""     enable = true,
-""     additional_vim_regex_highlighting = false,
-""   }
-""}
-""require'nvim-tree'.setup()
-""EOF
-""" telescope
-""nnoremap <Leader>f <cmd>Telescope find_files<cr>
-""nnoremap <Leader>g <cmd>Telescope live_grep<cr>
-""nnoremap <Leader>b <cmd>Telescope buffers<cr>
-""" " " vim-slime
-""let g:slime_target = "tmux"
-""let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
-""let g:slime_dont_ask_default = 1
-""let g:slime_cell_delimiter = "#%%"
-""nmap <leader>c <Plug>SlimeSendCell
-""nmap <leader>p <Plug>SlimeParagraphSend
-""let g:slime_python_ipython = 1
-""" " " nvim-tree
-""nnoremap <leader>e :NvimTreeToggle<CR>
-""" " "coc
-""set shortmess+=c
-""inoremap <silent><expr> <TAB>
-""      \ pumvisible() ? "\<C-n>" :
-""      \ <SID>check_back_space() ? "\<TAB>" :
-""      \ coc#refresh()
-""inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-""function! s:check_back_space() abort
-""  let col = col('.') - 1
-""  return !col || getline('.')[col - 1]  =~# '\s'
-""endfunction
-""nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
-""nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
-""nmap <silent> gd <Plug>(coc-definition)
-""nmap <silent> gy <Plug>(coc-type-definition)
-""nmap <silent> gi <Plug>(coc-implementation)
-""nmap <silent> gr <Plug>(coc-references)
-""nnoremap <silent> gk :call <SID>show_documentation()<CR>
-""au BufWrite *.py call CocActionAsync('format')

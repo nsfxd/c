@@ -1,0 +1,5 @@
+{
+  "suggest.noselect": true,
+  "npm.binPath": "/home/n/.local/share/pnpm/pnpm",
+  "prettier.bracketSpacing": false
+}
