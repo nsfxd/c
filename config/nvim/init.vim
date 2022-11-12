@@ -39,16 +39,16 @@ xnoremap C "_C
 nnoremap Y y$
 xnoremap Y y$
 " map r as replace
-function! s:ReplaceMM()
+function! s:ReplaceMM(p)
   let char1 = nr2char(getchar())
   let char2 = nr2char(getchar())
-  return "\"_d" . char1  . char2 . "\P"
+  return '"_d' . char1  . char2 . a:p
 endfunction
-nnoremap <expr> r <SID>ReplaceMM()
+nnoremap <expr> r (col(".") == col("$")-1) ? <SID>ReplaceMM("p"):  <SID>ReplaceMM("P")
 nnoremap rG "_dGpj
 nnoremap R "_Dp
 " replace line without newline: move to start, delete til end, paste substituted newline line
-nnoremap <silent> rr "_ddP
+nnoremap <expr><silent> rr (line('.') == line('$')) ? '"_ddp' : '"_ddP'
 " map s as search
 function s:SearchMM()
   let char1 = nr2char(getchar())
