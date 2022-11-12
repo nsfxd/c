@@ -1,3 +1,8 @@
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
 require("nnn").setup()
 require'pears'.setup()
 require'colorizer'.setup()
@@ -9,7 +14,7 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 require('telescope').setup {
-    defaults = {file_ignore_patterns = {"node_modules", "dist"}},
+    defaults = {file_ignore_patterns = {"node_modules", "dist", ".git"}},
     pickers = {find_files = {hidden = true}}
 }
 

@@ -5,6 +5,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'noib3/nvim-cokeline'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 " utils
 Plug 'steelsojka/pears.nvim'
 Plug 'b3nj5m1n/kommentary'
