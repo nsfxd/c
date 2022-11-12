@@ -32,6 +32,11 @@ set -gx NNN_FCOLORS "0404040000000600010F0F02"
 set -gx PATH $PATH $HOME/.local/bin 
 set -gx PATH $PATH $HOME/.cargo/bin
 
+function md
+  mkdir -p $argv
+  cd $argv
+end
+
 function nv
   set result (find -type f -print 2>/dev/null | fzf)
   if test -n "$result"
@@ -50,3 +55,5 @@ end
 set -gx PNPM_HOME "/home/n/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+
