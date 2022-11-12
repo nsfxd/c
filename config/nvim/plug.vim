@@ -29,6 +29,8 @@ lua require("plug")
 nnoremap <Leader>f <cmd>Telescope find_files<cr>
 nnoremap <Leader>g <cmd>Telescope live_grep<cr>
 nnoremap <Leader>b <cmd>Telescope buffers<cr>
+" open telescope if no fileArg onopen
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | execute 'Telescope find_files' | endif
 " vim-slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
@@ -67,3 +69,4 @@ function! ShowDocumentation()
   endif
 endfunction
 nmap <leader>a  <Plug>(coc-codeaction)
+
