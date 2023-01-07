@@ -40,7 +40,8 @@ nmap <leader>c <Plug>SlimeSendCell
 nmap <leader>p <Plug>SlimeParagraphSend
 let g:slime_python_ipython = 1
 " nnn
-nnoremap <leader>n <cmd>NnnPicker<CR>
+tnoremap <C-A-n> <cmd>NnnPicker<CR>
+nnoremap <C-A-n> <cmd>NnnPicker %:p:h<CR>
 " coc
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
