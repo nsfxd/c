@@ -23,6 +23,7 @@ lnc() {
 lnsh() {
   local base=$BASE/sh
   local bin=$HOME/.local/bin
+  mkdir -p "$bin"
   for x in $base/*.sh; do
     local n=$(basename "$x" | cut -f 1 -d '.')
     local to=$bin/$n

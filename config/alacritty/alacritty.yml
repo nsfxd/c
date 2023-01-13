@@ -3,8 +3,8 @@ window:
    x: 0
    y: 0
   dimensions:
-   columns: 99
-   lines: 99
+   columns: 999
+   lines: 999
   decorations: none
   startup_mode: Windowed
 
