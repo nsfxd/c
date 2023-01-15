@@ -14,7 +14,7 @@ set -gx FZF_DEFAULT_OPTS '
 abbr -ag S "sudo pacman -Syu"
 abbr -ag Rs "sudo pacman -Rs"
 abbr -ag Ss "pacman -Ss"
-alias n "nnn -H -o"
+alias n "nnn -H -o -A"
 alias rm "echo Use 'trash', or the full path i.e. '/bin/rm'"
 alias Sq "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias Rq "pacman -Qqe | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rs"
@@ -31,6 +31,7 @@ set -gx NNN_FCOLORS "0404040000000600010F0F02"
 
 set -gx PATH $PATH $HOME/.local/bin 
 set -gx PATH $PATH $HOME/.cargo/bin
+set -gx PATH $PATH $HOME/go/bin
 
 function md
   mkdir -p $argv

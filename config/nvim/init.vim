@@ -16,8 +16,6 @@ set noswapfile
 set nobackup
 set nowritebackup
 set cursorline
-" BASE MAPPINGS
-inoremap jj <ESC>
 " map m as cut 
 nnoremap m d
 xnoremap m d

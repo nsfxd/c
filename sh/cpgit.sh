@@ -1,26 +1,72 @@
 #!/bin/sh
+# https://stackoverflow.com/a/52269934
 
-repoAndSub=$1
-to=$2
+usage() {
+  echo "Usage: cpgit [GITHUB_REPO_SUBDIR_URL] [PATH]"
+  exit
+}
 
-repo=$(echo $repoAndSub | cut -d "/" -f1-2 )
-sub=$(echo $repoAndSub | cut -d "/" -f3- )
+silent() {
+ $@ > /dev/null 2>&1
+}
 
-grepo="git@github.com:$repo"
-tmp=/tmp/"$(echo $sub | sed 's/\//_/g')"-$(date +%s)
+url=$1
+targetDir=$2
 
-# Create local repository for subdirectory checkout, make it hidden to avoid having to drill down to the subfolder
+if [[ -z "$url" ]]; then
+  usage
+fi
 
-mkdir -p $tmp
-pushd $tmp
-git init
-git remote add -f origin $grepo
-git config core.sparseCheckout true
+if [[ -z "$targetDir" ]]; then
+  targetDir="."
+fi
 
-# # Add the subdirectory of interest to the sparse checkout.
-echo $sub >> .git/info/sparse-checkout
-git pull origin master
-popd
+domain=$(echo $url | cut -d '/' -f3)
 
-mkdir -p $to
-mv $tmp/$sub/* $to
+repoFromUrl() {
+  case "$domain" in
+    # https://github.com/tokio-rs/axum/tree/main/examples/hello-world
+    github.com) echo $url | cut -d '/' -f1-5
+    ;;
+    # https://git.sr.ht/~sircmpwn/sway/tree/master/item/sway
+    git.sr.ht) echo $url | cut -d '/' -f1-5
+    ;;
+    # https://gitlab.freedesktop.org/xrdesktop/gnome-shell/-/tree/42.0-xrdesktop/src
+    *gitlab*) echo $url | cut -d '/' -f1-5
+    ;;
+    *) echo "failed to detect repo"; exit 1
+    ;;
+  esac
+}
+
+subDirFromUrl() {
+  case "$domain" in
+    # https://github.com/tokio-rs/axum/tree/main/examples/hello-world
+    github.com) echo $url | cut -d '/' -f8-
+    ;;
+    # https://git.sr.ht/~sircmpwn/sway/tree/master/item/sway
+    git.sr.ht) echo $url | cut -d '/' -f9-
+    ;;
+    # https://gitlab.freedesktop.org/xrdesktop/gnome-shell/-/tree/42.0-xrdesktop/src
+    *gitlab*) echo $url | cut -d '/' -f9-
+    ;;
+    *) echo "failed to detect repo"; exit 1
+    ;;
+  esac
+}
+
+repo=$(repoFromUrl)
+subDir=$(subDirFromUrl)
+tmpDir=$(mktemp -d -t XXXXXXXXXX-$(date +%Y-%m-%d-%H-%M-%S))
+
+echo "Copying ""$url"" into ""'""$targetDir""'""..."
+silent pushd "$tmpDir"
+silent git clone \
+  --depth 1  \
+  --filter=blob:none  \
+  --sparse \
+  "$repo" .
+silent git sparse-checkout set "$subDir"
+silent popd
+mkdir -p "$targetDir"
+mv "$tmpDir"/"$subDir" "$targetDir"
