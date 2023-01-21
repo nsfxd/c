@@ -53,6 +53,7 @@ function s:SearchMM()
   let char2 = nr2char(getchar())
   return "v" . char1  . char2 . "\"hy/\<C-r>h\<CR>"
 endfunction
+nnoremap s nop
 nnoremap <expr> s <SID>SearchMM()
 vnoremap <silent> s y/\V<C-R>=escape(@",'/\')<CR><CR>
 " turnoff /n search highlight
@@ -66,6 +67,7 @@ nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader><tab> <C-w><C-w>
 " search and replace
 nnoremap <Leader>r <ESC>:%s///gc<left><left><left>
+vnoremap <Leader>r :s//gc<left><left><left>
 " improve init time by telling nvim where python is located
 let g:python3_host_prog = '/usr/bin/python3'
 
