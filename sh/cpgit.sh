@@ -1,45 +1,32 @@
 #!/bin/sh
 # https://stackoverflow.com/a/52269934
 
-usage() {
-  echo "Usage: cpgit [GITHUB_REPO_SUBDIR_URL] [PATH]"
-  exit
-}
+set -o errexit
+set -o nounset
+set -o pipefail
 
 silent() {
  $@ > /dev/null 2>&1
 }
 
-url=$1
-targetDir=$2
+usage() {
+  echo "Usage: cpgit [REPO_SUBDIR_URL | GITHUB_REPO_SUBDIR] [PATH]"
+  exit
+}
 
-if [[ -z "$url" ]]; then
+if [[ -z "$1" ]]; then
   usage
 fi
 
-if [[ -z "$targetDir" ]]; then
-  targetDir="."
-fi
+targetDir="$2"
+[[ "$1" == "http"* ]] && isURL=1 || isURL=0
+[[ "$isURL" = 0 ]] && domain="github.com" || domain=$(echo "$1" | cut -d '/' -f3)
+[[ "$isURL" = 0 ]] && repo=$(echo "$1" | cut -d '/' -f1-2) || repo=$(echo "$1" | cut -d '/' -f4-5)
 
-domain=$(echo $url | cut -d '/' -f3)
-
-repoFromUrl() {
-  case "$domain" in
-    # https://github.com/tokio-rs/axum/tree/main/examples/hello-world
-    github.com) echo $url | cut -d '/' -f1-5
-    ;;
-    # https://git.sr.ht/~sircmpwn/sway/tree/master/item/sway
-    git.sr.ht) echo $url | cut -d '/' -f1-5
-    ;;
-    # https://gitlab.freedesktop.org/xrdesktop/gnome-shell/-/tree/42.0-xrdesktop/src
-    *gitlab*) echo $url | cut -d '/' -f1-5
-    ;;
-    *) echo "failed to detect repo"; exit 1
-    ;;
-  esac
-}
+url='git@'"$domain"':'"$repo"
 
 subDirFromUrl() {
+  local url="$1"
   case "$domain" in
     # https://github.com/tokio-rs/axum/tree/main/examples/hello-world
     github.com) echo $url | cut -d '/' -f8-
@@ -55,18 +42,20 @@ subDirFromUrl() {
   esac
 }
 
-repo=$(repoFromUrl)
-subDir=$(subDirFromUrl)
+[[ "$isURL" = 0 ]] && subDir=$(echo "$1" | cut -d '/' -f3-) || subDir=$(subDirFromUrl "$1")
+
 tmpDir=$(mktemp -d -t XXXXXXXXXX-$(date +%Y-%m-%d-%H-%M-%S))
 
-echo "Copying ""$url"" into ""'""$targetDir""'""..."
-silent pushd "$tmpDir"
-silent git clone \
+echo 'Copying '"$url"' into '"'""$targetDir""'"'...'
+pushd "$tmpDir"
+git clone \
   --depth 1  \
   --filter=blob:none  \
   --sparse \
-  "$repo" .
-silent git sparse-checkout set "$subDir"
-silent popd
+  "$url" .
+git sparse-checkout set "$subDir"
+popd
 mkdir -p "$targetDir"
-mv "$tmpDir"/"$subDir" "$targetDir"
+
+shopt -s dotglob
+mv "$tmpDir"/"$subDir"/* "$targetDir"
