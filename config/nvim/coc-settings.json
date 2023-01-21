@@ -3,5 +3,6 @@
   "npm.binPath": "/home/n/.local/share/pnpm/pnpm",
   "prettier.bracketSpacing": false,
   "prettier.semi": false,
+  "prettier.singleQuote": true,
   "coc.preferences.formatOnSave": true
 }
