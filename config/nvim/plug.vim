@@ -7,7 +7,7 @@ Plug 'noib3/nvim-cokeline'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 " utils
-Plug 'steelsojka/pears.nvim'
+Plug 'windwp/nvim-autopairs'
 Plug 'b3nj5m1n/kommentary'
 Plug 'tpope/vim-abolish'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -15,7 +15,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'luukvbaal/nnn.nvim'
+Plug 'nvim-tree/nvim-tree.lua'
 " Lsp and syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -39,9 +39,6 @@ let g:slime_cell_delimiter = "#%%"
 nmap <leader>c <Plug>SlimeSendCell
 nmap <leader>p <Plug>SlimeParagraphSend
 let g:slime_python_ipython = 1
-" nnn
-tnoremap <C-A-n> <cmd>NnnPicker<CR>
-nnoremap <C-A-n> <cmd>NnnPicker %:p:h<CR>
 " coc
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
@@ -70,4 +67,6 @@ function! ShowDocumentation()
   endif
 endfunction
 nmap <leader>a  <Plug>(coc-codeaction)
+" nvim tree
+nnoremap <Leader>e <cmd>NvimTreeToggle<CR>
 

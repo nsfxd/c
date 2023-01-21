@@ -3,8 +3,19 @@ require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = true,
 }
-require("nnn").setup()
-require'pears'.setup()
+-- require("nnn").setup()
+-- require'pears'.setup()
+require("nvim-autopairs").setup {}
+require("nvim-tree").setup({
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "d", action = "trash" },
+      },
+    },
+  },
+})
 require'colorizer'.setup()
 require'nvim-treesitter.configs'.setup {
   auto_install = true,
