@@ -2,5 +2,6 @@
   "suggest.noselect": true,
   "npm.binPath": "/home/n/.local/share/pnpm/pnpm",
   "prettier.bracketSpacing": false,
+  "prettier.semi": false,
   "coc.preferences.formatOnSave": true
 }
