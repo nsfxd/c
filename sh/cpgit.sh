@@ -1,5 +1,6 @@
 #!/bin/sh
 # https://stackoverflow.com/a/52269934
+# https://sharats.me/posts/shell-script-best-practices/
 
 set -o errexit
 set -o nounset

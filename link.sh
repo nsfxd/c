@@ -1,6 +1,9 @@
 #!/bin/sh
+set -o errexit
+set -o nounset
+set -o pipefail
 
-BASE=$HOME/c
+BASE="$(dirname "$0")"
 CONFIG=$HOME/.config
 
 lns() {

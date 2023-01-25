@@ -69,4 +69,5 @@ endfunction
 nmap <leader>a  <Plug>(coc-codeaction)
 " nvim tree
 nnoremap <Leader>e <cmd>NvimTreeToggle<CR>
-
+" markdown-preview
+nmap <leader>p :CocCommand markdown-preview-enhanced.openPreview<CR>
