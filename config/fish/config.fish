@@ -14,6 +14,7 @@ set -gx FZF_DEFAULT_OPTS '
 abbr -ag S "sudo pacman -Syu"
 abbr -ag Rs "sudo pacman -Rs"
 abbr -ag Ss "pacman -Ss"
+alias t "cd n && tmux"
 alias n "nnn -H -o -A"
 alias rm "echo Use 'trash', or the full path i.e. '/bin/rm'"
 alias Sq "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"

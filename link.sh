@@ -3,7 +3,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-BASE="$(dirname "$0")"
+BASE="$(dirname "$0" | xargs realpath)" 
 CONFIG=$HOME/.config
 
 lns() {
