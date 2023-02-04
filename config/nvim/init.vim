@@ -70,8 +70,16 @@ nnoremap <Leader>r <ESC>:%s///gc<left><left><left>
 vnoremap <Leader>r :s//gc<left><left><left>
 " improve init time by telling nvim where python is located
 let g:python3_host_prog = '/usr/bin/python3'
+" improve init time by disabling language extension
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
 
 let vimplug = expand(stdpath('data') . '/site/autoload/plug.vim')
 if filereadable(vimplug)
   source ~/.config/nvim/plug.vim
+endif
+
+if has("wsl")
+  lua require("wsl-clip")
 endif
