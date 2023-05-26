@@ -58,4 +58,6 @@ set -gx PNPM_HOME $HOME/.local/share/pnpm
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
 
-
+#npm
+set -gx NPM_CONFIG_PREFIX $HOME/.local/share/npm
+set -gx PATH $PATH "$NPM_CONFIG_PREFIX"/bin
