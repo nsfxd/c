@@ -33,6 +33,12 @@ set -gx NNN_FCOLORS "0404040000000600010F0F02"
 set -gx PATH $PATH $HOME/.local/bin 
 set -gx PATH $PATH $HOME/.cargo/bin
 set -gx PATH $PATH $HOME/go/bin
+set -gx PATH $PATH $HOME/.bun/bin 
+set -gx PATH $PATH $HOME/.fly/bin 
+
+
+# docker 
+abbr -ag dr "docker run --init -it --rm"
 
 function md
   mkdir -p $argv
@@ -54,6 +60,7 @@ function fd
 end
 
 # pnpm
+set -gx npm_config_user_agent pnpm # for cloudflare workers cli wranger to use pnpm by default
 set -gx PNPM_HOME $HOME/.local/share/pnpm
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end

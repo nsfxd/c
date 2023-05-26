@@ -38,7 +38,6 @@ let g:slime_dont_ask_default = 1
 let g:slime_cell_delimiter = "#%%"
 nmap <leader>c <Plug>SlimeSendCell
 nmap <leader>p <Plug>SlimeParagraphSend
-let g:slime_python_ipython = 1
 " coc
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
@@ -70,4 +69,4 @@ nmap <leader>a  <Plug>(coc-codeaction)
 " nvim tree
 nnoremap <Leader>e <cmd>NvimTreeToggle<CR>
 " markdown-preview
-nmap <leader>p :CocCommand markdown-preview-enhanced.openPreview<CR>
+nmap <leader>P :CocCommand markdown-preview-enhanced.openPreview<CR>
