@@ -6,16 +6,21 @@ require("indent_blankline").setup {
 -- require("nnn").setup()
 -- require'pears'.setup()
 require("nvim-autopairs").setup {}
+
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+  api.config.mappings.default_on_attach(bufnr)
+  vim.keymap.del('n', 'd', { buffer = bufnr })
+  vim.keymap.set('n', 'd',     api.fs.trash,                          opts('Trash'))
+end
+
 require("nvim-tree").setup({
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "d", action = "trash" },
-      },
-    },
-  },
+  on_attach = on_attach,
 })
+
 require'colorizer'.setup()
 require'nvim-treesitter.configs'.setup {
   auto_install = true,
