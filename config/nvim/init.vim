@@ -16,6 +16,12 @@ set noswapfile
 set nobackup
 set nowritebackup
 set cursorline
+" improve init time by telling nvim where python is located
+let g:python3_host_prog = '/usr/bin/python3'
+" improve init time by disabling language extension
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
 " map m as cut 
 nnoremap m d
 xnoremap m d
@@ -36,17 +42,23 @@ xnoremap C "_C
 " add yank cursor to end
 nnoremap Y y$
 xnoremap Y y$
-" map r as replace
-function! s:ReplaceMM(p)
+" map redo
+nnoremap U <C-u>
+xnoremap U <C-u>
+" map r as remap
+function! s:ReplaceMM()
   let char1 = nr2char(getchar())
   let char2 = nr2char(getchar())
-  return '"_d' . char1  . char2 . a:p
+  if (col(".") + strlen(expand('<cword>')) >= col("$")-1)
+    return '"_d'.char1.char2.'p'
+  endif
+  return '"_d'.char1.char2.'P'
 endfunction
-nnoremap <expr> r (col(".") == col("$")-1) ? <SID>ReplaceMM("p"):  <SID>ReplaceMM("P")
-nnoremap rG "_dGpj
-nnoremap R "_Dp
+nnoremap <expr>r <SID>ReplaceMM()
 " replace line without newline: move to start, delete til end, paste substituted newline line
-nnoremap <expr><silent> rr (line('.') == line('$')) ? '"_ddp' : '"_ddP'
+nnoremap <expr>rr (line('.') == line('$')) ? '"_ddp' : '"_ddP'
+nnoremap rG "_dGp
+nnoremap R "_Dp
 " map s as search
 function s:SearchMM()
   let char1 = nr2char(getchar())
@@ -68,18 +80,8 @@ nnoremap <Leader><tab> <C-w><C-w>
 " search and replace
 nnoremap <Leader>r <ESC>:%s///gc<left><left><left>
 vnoremap <Leader>r :s//gc<left><left><left>
-" improve init time by telling nvim where python is located
-let g:python3_host_prog = '/usr/bin/python3'
-" improve init time by disabling language extension
-let g:loaded_node_provider = 0
-let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = 0
 
 let vimplug = expand(stdpath('data') . '/site/autoload/plug.vim')
 if filereadable(vimplug)
   source ~/.config/nvim/plug.vim
-endif
-
-if has("wsl")
-  lua require("wsl-clip")
 endif
