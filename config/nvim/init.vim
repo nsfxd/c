@@ -68,8 +68,6 @@ endfunction
 nnoremap s nop
 nnoremap <expr> s <SID>SearchMM()
 vnoremap <silent> s y/\V<C-R>=escape(@",'/\')<CR><CR>
-" turnoff /n search highlight
-nnoremap <C-n> :noh<CR>
 " map space as leader
 let mapleader = " "
 nnoremap <Leader>w :w<CR>
@@ -77,6 +75,8 @@ nnoremap <Leader>W :noa w<CR>
 nnoremap <Leader>q :bd<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader><tab> <C-w><C-w>
+" turnoff /n search highlight
+nnoremap <Leader> :noh<CR>
 " search and replace
 nnoremap <Leader>r <ESC>:%s///gc<left><left><left>
 vnoremap <Leader>r :s//gc<left><left><left>
