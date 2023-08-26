@@ -63,7 +63,7 @@ nnoremap R "_Dp
 function s:SearchMM()
   let char1 = nr2char(getchar())
   let char2 = nr2char(getchar())
-  return "v" . char1  . char2 . "\"hy/\<C-r>h\<CR>"
+  return "v" . char1  . char2 . "\"hy/\<C-r>h\<CR>N"
 endfunction
 nnoremap s nop
 nnoremap <expr> s <SID>SearchMM()
