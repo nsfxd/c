@@ -15,10 +15,18 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-tree/nvim-tree.lua'
+Plug 'luukvbaal/nnn.nvim'
 " Lsp and syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" LSP Support
+Plug 'neovim/nvim-lspconfig'             " Required
+Plug 'williamboman/mason.nvim'           " Optional
+Plug 'williamboman/mason-lspconfig.nvim' " Optional
+" Autocompletion
+Plug 'hrsh7th/nvim-cmp'         " Required
+Plug 'hrsh7th/cmp-nvim-lsp'     " Required
+Plug 'L3MON4D3/LuaSnip'         " Required
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
 " repl 
 Plug 'jpalardy/vim-slime'
 call plug#end()
@@ -38,35 +46,18 @@ let g:slime_dont_ask_default = 1
 let g:slime_cell_delimiter = "#%%"
 nmap <leader>c <Plug>SlimeSendCell
 nmap <leader>p <Plug>SlimeParagraphSend
-" coc
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-nmap <leader>k <Plug>(coc-diagnostic-prev)
-nmap <leader>j <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-nmap <leader>a  <Plug>(coc-codeaction)
-" nvim tree
-nnoremap <Leader>e <cmd>NvimTreeToggle<CR>
-" markdown-preview
-nmap <leader>P :CocCommand markdown-preview-enhanced.openPreview<CR>
+lua <<EOF
+local lsp = require('lsp-zero').preset({})
+lsp.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp.default_keymaps({buffer = bufnr})
+  lsp.buffer_autoformat()
+end)
+-- " (Optional) Configure lua language server for neovim
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lsp.setup()
+EOF
+" nnn
+tnoremap <C-A-n> <cmd>NnnPicker<CR>
+nnoremap <C-A-n> <cmd>NnnPicker<CR>

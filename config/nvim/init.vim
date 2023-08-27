@@ -1,4 +1,4 @@
-"base config
+" base config
 set termguicolors
 set noshowmode
 set splitbelow
@@ -45,7 +45,7 @@ xnoremap Y y$
 " map redo
 nnoremap U <C-u>
 xnoremap U <C-u>
-" map r as remap
+" map r as replace
 function! s:ReplaceMM()
   let char1 = nr2char(getchar())
   let char2 = nr2char(getchar())
