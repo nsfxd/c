@@ -60,10 +60,14 @@ function fd
 end
 
 # pnpm
-set -gx npm_config_user_agent pnpm # for cloudflare workers cli wranger to use pnpm by default
-set -gx PNPM_HOME $HOME/.local/share/pnpm
-set -gx PATH "$PNPM_HOME" $PATH
+set -gx PNPM_HOME "/home/n/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
 # pnpm end
+
+# pnpm & wrangler
+set -gx npm_config_user_agent pnpm # for cloudflare workers cli wranger to use pnpm by default
 
 #npm
 set -gx NPM_CONFIG_PREFIX $HOME/.local/share/npm
