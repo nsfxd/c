@@ -6,6 +6,10 @@ set -o pipefail
 BASE="$(dirname "$0" | xargs realpath)" 
 CONFIG=$HOME/.config
 
+if [ ! -L $CONFIG ];then
+  mkdir $CONFIG
+fi
+
 lns() {
   local fm=$1
   local to=$2
