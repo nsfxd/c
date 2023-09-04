@@ -13,4 +13,9 @@ generateHosts=false
 
 [boot]
 systemd=true
+
+[automount]
+enabled = false
+options = "metadata"
+mountFsTab = true
 " | sudo tee /etc/wsl.conf
