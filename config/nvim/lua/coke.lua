@@ -1,25 +1,25 @@
 local map = vim.api.nvim_set_keymap
-local get_hex = require('cokeline/utils').get_hex
+local get_hl_attr = require('cokeline.hlgroups').get_hl_attr
 require('cokeline').setup({
   default_hl = {
     fg = function(buffer)
       return
-        buffer.is_focused
-        and get_hex('Normal', 'fg')
-         or get_hex('Comment', 'fg')
+          buffer.is_focused
+          and get_hl_attr('Normal', 'fg')
+          or get_hl_attr('Comment', 'fg')
     end,
-    bg = get_hex('ColorColumn', 'bg'),
+    bg = get_hl_attr('ColorColumn', 'bg'),
   },
 
   components = {
     {
       text = ' ',
-      bg = get_hex('Normal', 'bg'),
+      bg = get_hl_attr('Normal', 'bg'),
     },
     {
       text = '',
-      fg = get_hex('ColorColumn', 'bg'),
-      bg = get_hex('Normal', 'bg'),
+      fg = get_hl_attr('ColorColumn', 'bg'),
+      bg = get_hl_attr('Normal', 'bg'),
     },
     {
       text = function(buffer)
@@ -46,11 +46,11 @@ require('cokeline').setup({
     },
     {
       text = '',
-      fg = get_hex('ColorColumn', 'bg'),
-      bg = get_hex('Normal', 'bg'),
+      fg = get_hl_attr('ColorColumn', 'bg'),
+      bg = get_hl_attr('Normal', 'bg'),
     },
   },
 })
-for i = 1,9 do
-  map('n', ('<Leader>%s'):format(i),      ('<Plug>(cokeline-focus-%s)'):format(i),  { silent = true })
+for i = 1, 9 do
+  map('n', ('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i), { silent = true })
 end
