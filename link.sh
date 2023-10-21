@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh	
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -6,7 +6,7 @@ set -o pipefail
 BASE="$(dirname "$0" | xargs realpath)" 
 CONFIG=$HOME/.config
 
-if [ ! -L $CONFIG ];then
+if [ ! -d $CONFIG ];then
   mkdir $CONFIG
 fi
 

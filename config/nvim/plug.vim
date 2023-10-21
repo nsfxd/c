@@ -11,6 +11,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'b3nj5m1n/kommentary'
 Plug 'tpope/vim-abolish'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'gbprod/substitute.nvim'
 " telescope and nnn
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'

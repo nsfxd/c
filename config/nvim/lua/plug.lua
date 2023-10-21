@@ -2,6 +2,11 @@ require("coke")
 
 require("nnn").setup()
 require("ibl").setup()
+require("substitute").setup()
+vim.keymap.set("n", "r", require('substitute').operator, { noremap = true })
+vim.keymap.set("n", "rr", require('substitute').line, { noremap = true })
+vim.keymap.set("n", "R", require('substitute').eol, { noremap = true })
+vim.keymap.set("x", "r", require('substitute').visual, { noremap = true })
 require("nvim-autopairs").setup {}
 
 -- local function on_attach(bufnr)
