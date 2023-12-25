@@ -4,3 +4,4 @@ sudo pacman -Syu git openssh fish neovim which tmux trash-cli base-devel nodejs 
 
 git config --global user.name 'nsfxd'
 git config --global user.email 'nsfxd@proton.me'
+sudo chsh -s /bin/fish $USER
